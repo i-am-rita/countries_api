@@ -25,7 +25,7 @@ const NavbarWrapper = styled.nav`
   background: #fff;
   color: #000;
   padding: 0px 65px;
-  margin: 0;
+
 
   .navigation-bar {
     display: flex;
