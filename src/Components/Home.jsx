@@ -27,11 +27,12 @@ const Home = () => {
         >
           <Grid item md={4}>
             {" "} */}
+            {/* Map through the data here */}
             <MediaCard
-            //   country="fvf"
-            //   population="jhbhjfv"
-            //   region="Region: Europe"
-            //   capital="Berlin"
+              country="fvf"
+              population="jhbhjfv"
+              region="Region: Europe"
+              capital="Berlin"
             />
           {/* </Grid>
         </Grid>
@@ -43,7 +44,7 @@ const Home = () => {
 export default Home;
 
 const HomeWrapper = styled.div`
-  padding: 0px 65px;
+  padding: 0px 60px;
   .search-filter {
     display: flex;
     align-items: center;
