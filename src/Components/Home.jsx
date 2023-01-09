@@ -1,4 +1,4 @@
-import { faAngleDown, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
@@ -8,20 +8,47 @@ import axios from "axios";
 const Home = () => {
   const [search, setSearch] = useState("");
   const [countries, setCountries] = useState([]);
+  const [region, setRegion] = useState("all");
+  console.log(region);
+  const sortOptions = ["Africa", "America", "Asia", "Europe", "Oceania"];
+
+  const flagData = async () => {
+    return await axios
+      .get("https://restcountries.com/v3.1/all")
+      .then((res) => setCountries(res?.data))
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
-    axios.get("https://restcountries.com/v3.1/all").then((data) => {
-      setCountries(data?.data);
-    });
+    flagData();
   }, []);
 
   //   const keys = ["name.common", "population"];
+  //   Search Functionality
   const handleSearch = (items) => {
     return items.filter((item) =>
-      //   keys.some((key) => item[key].toLowerCase().includes(search))
       item.name.common.toLowerCase().includes(search)
     );
   };
+
+  //   const handleSort = (region) => {
+  //     return countries.filter((country) => country.region === region);
+  //   };
+
+  useEffect(() => {
+    const handleSort = async () => {
+      try {
+        const res = await axios.get(
+          `https://restcountries.com/v3.1/region/${region}`
+        );
+        setCountries(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    handleSort();
+  }, [region]);
+
   return (
     <HomeWrapper>
       <div className="search-filter">
@@ -33,12 +60,26 @@ const Home = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <div className="filter-bar">
-          <p>Filter by Region</p>
-          <FontAwesomeIcon icon={faAngleDown} />
+        <div>
+          <select
+            aria-label="Filter by Region"
+            name="filtering"
+            className="filter-bar"
+            onChange={(e) => setRegion(e.target.value)}
+            value={region}
+          >
+            <option value="all">Filter by Region</option>
+            {sortOptions.map((item) => (
+              <option value={item.region} key={item.region}>
+                {item}
+              </option>
+            ))}
+          </select>
+          {/* <p>Filter by Region</p> */}
+          {/* <FontAwesomeIcon icon={faAngleDown} /> */}
         </div>
       </div>
-      <MediaCard data={handleSearch(countries).slice(0, 10)} />
+      <MediaCard data={handleSearch(countries)} />
       {/* <MediaCard countries={countries}  /> */}
     </HomeWrapper>
   );
@@ -78,17 +119,34 @@ const HomeWrapper = styled.div`
         color: #000;
         padding-left: 20px;
         font-size: 16px;
+        width: 100%;
       }
     }
 
     .filter-bar {
       display: flex;
       align-items: center;
-      gap: 50px;
-      padding: 0 20px;
+      gap: 40px;
+      padding: 15px 15px;
+      padding-right: 20px;
       background: #fff;
       border-radius: 5px;
       color: #5b5e5e;
+
+      option {
+        font-size: 20px;
+      }
     }
   }
 `;
+
+//   const handleSearch = async () => {
+//     // e.preventDefault();
+//     return await axios
+//       .get(`https://restcountries.com/v3.1/name/?q${search}`)
+//       .then((res) => {
+//         setCountries(res.data)
+//         setSearch("");
+//       })
+//       .catch((err) => console.log(err));
+//   };
