@@ -4,12 +4,14 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import MediaCard from "./Card";
 import axios from "axios";
+import useLocalStorage from "use-local-storage";
 
-const Home = () => {
+const Home = ({ theme }) => {
   const [search, setSearch] = useState("");
   const [countries, setCountries] = useState([]);
+
   const [region, setRegion] = useState("all");
-  console.log(region);
+  //   console.log(region);
   const sortOptions = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
   const flagData = async () => {
@@ -36,25 +38,31 @@ const Home = () => {
   //   };
 
   useEffect(() => {
-    const handleSort = async () => {
-      try {
-        const res = await axios.get(
-          `https://restcountries.com/v3.1/region/${region}`
-        );
-        setCountries(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    handleSort();
+    if (region) {
+      const handleSort = async () => {
+        try {
+          const res = await axios.get(
+            `https://restcountries.com/v3.1/region/${region}`
+          );
+          setCountries(res.data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      handleSort();
+    }
   }, [region]);
 
   return (
     <HomeWrapper>
       <div className="search-filter">
-        <div className="search-bar">
+        <div
+          className="search-bar"
+          style={{ background: theme ? "hsl(209, 23%, 22%)" : "#fff" }}
+        >
           <FontAwesomeIcon icon={faSearch} />
           <input
+            style={{ background: theme ? "hsl(209, 23%, 22%)" : "#fff" }}
             placeholder="Search for a country..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -62,6 +70,13 @@ const Home = () => {
         </div>
         <div>
           <select
+            style={{
+              background: theme ? "hsl(209, 23%, 22%)" : "#fff",
+              color: theme ? "#fff" : "#5b5b5e",
+              border: "none",
+              fontSize: "16px",
+              outline: "none"
+            }}
             aria-label="Filter by Region"
             name="filtering"
             className="filter-bar"

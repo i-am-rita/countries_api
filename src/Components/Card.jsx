@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-export default function MediaCard({ data }) {
+export default function MediaCard({ data, theme }) {
   return (
     <>
       <div
@@ -20,7 +20,15 @@ export default function MediaCard({ data }) {
               : item.toLowerCase(search);
           }) */}
         {data.map((detail, id) => (
-          <Card sx={{ maxWidth: 320, maxHeight: 500, padding: "0 0 10px 0" }} key={id}>
+          <Card
+            sx={{
+              maxWidth: 320,
+              maxHeight: 500,
+              padding: "0 0 10px 0",
+            //   background: theme ? "red" : "#fff"
+            }}
+            key={id}
+          >
             <div key="id">
               <CardMedia
                 sx={{ height: 200 }}

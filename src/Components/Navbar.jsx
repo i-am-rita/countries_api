@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon } from "@fortawesome/free-regular-svg-icons";
+import "../index.css";
 
-const Navbar = () => {
+const Navbar = ({ theme, toggleMode }) => {
   return (
-    <NavbarWrapper>
+    <NavbarWrapper style={{ background: theme ? "hsl(209, 23%, 22%)" : "#fff", color: theme ? "#fff" : "#000" }}>
       <nav className="navigation-bar">
         <div>
           <h1 style={{ fontSize: "1.4rem" }}>Where in the world?</h1>
         </div>
         <div className="light-mode">
-          <FontAwesomeIcon icon={faMoon} />
+          <FontAwesomeIcon icon={faMoon} onClick={toggleMode} />
           <div>Dark Mode</div>
         </div>
       </nav>
@@ -25,6 +26,7 @@ const NavbarWrapper = styled.nav`
   background: #fff;
   color: #000;
   padding: 0px 65px;
+  z-index: 15px;
 
   .navigation-bar {
     display: flex;
