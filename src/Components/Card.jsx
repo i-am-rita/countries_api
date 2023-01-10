@@ -14,27 +14,17 @@ export default function MediaCard({ data, theme }) {
           gap: "50px",
         }}
       >
-        {/* .filter((item) => {
-            return search.toLowerCase() === ""
-              ? item
-              : item.toLowerCase(search);
-          }) */}
         {data.map((detail, id) => (
           <Card
             sx={{
               maxWidth: 320,
               maxHeight: 500,
               padding: "0 0 10px 0",
-            //   background: theme ? "red" : "#fff"
             }}
             key={id}
           >
             <div key="id">
-              <CardMedia
-                sx={{ height: 200 }}
-                image={detail?.flags.svg}
-                // style={{height: "150px"}}
-              />
+              <CardMedia sx={{ height: 200 }} image={detail?.flags.svg} />
               <CardContent>
                 <Typography
                   gutterBottom

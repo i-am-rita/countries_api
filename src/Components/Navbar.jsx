@@ -6,14 +6,19 @@ import "../index.css";
 
 const Navbar = ({ theme, toggleMode }) => {
   return (
-    <NavbarWrapper style={{ background: theme ? "hsl(209, 23%, 22%)" : "#fff", color: theme ? "#fff" : "#000" }}>
+    <NavbarWrapper
+      style={{
+        background: theme ? "hsl(209, 23%, 22%)" : "#fff",
+        color: theme ? "#fff" : "#000",
+      }}
+    >
       <nav className="navigation-bar">
-        <div>
-          <h1 style={{ fontSize: "1.4rem" }}>Where in the world?</h1>
+        <div className="heading">
+          <h1>Where in the world?</h1>
         </div>
         <div className="light-mode">
           <FontAwesomeIcon icon={faMoon} onClick={toggleMode} />
-          <div>Dark Mode</div>
+          <div>{theme ? "Dark Mode" : "Light Mode"}</div>
         </div>
       </nav>
     </NavbarWrapper>
@@ -27,15 +32,30 @@ const NavbarWrapper = styled.nav`
   color: #000;
   padding: 0px 65px;
   z-index: 15px;
+  @media (max-width: 475px) {
+    padding: 10px 15px;
+  }
 
   .navigation-bar {
     display: flex;
     justify-content: space-between;
 
+    h1 {
+      font-size: 1.4rem;
+    }
+
+    @media (max-width: 475px) {
+      padding: 0;
+      h1 {
+        font-size: 1rem;
+      }
+    }
+
     .light-mode {
       display: flex;
       align-items: center;
       gap: 8px;
+      font-size:14px;
     }
   }
 `;

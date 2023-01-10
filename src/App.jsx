@@ -11,7 +11,6 @@ function App() {
 
   const toggleMode = () => {
     setTheme(!theme);
-    console.log("red");
   };
   return (
     <div

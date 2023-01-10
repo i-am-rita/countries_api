@@ -75,7 +75,7 @@ const Home = ({ theme }) => {
               color: theme ? "#fff" : "#5b5b5e",
               border: "none",
               fontSize: "16px",
-              outline: "none"
+              outline: "none",
             }}
             aria-label="Filter by Region"
             name="filtering"
@@ -150,6 +150,24 @@ const HomeWrapper = styled.div`
 
       option {
         font-size: 20px;
+      }
+    }
+
+    @media screen and (max-width: 475px) {
+      flex-direction: column;
+      margin: 25px -20px;
+      justify-content: space-between;
+
+      .search-bar {
+        width: 100%;
+      }
+
+      .filter-bar {
+        margin: 45px 177px 15px 0;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        ${"" /* margin-right: 50px; */}
       }
     }
   }
