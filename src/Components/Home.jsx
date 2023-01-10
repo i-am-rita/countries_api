@@ -62,7 +62,10 @@ const Home = ({ theme }) => {
         >
           <FontAwesomeIcon icon={faSearch} />
           <input
-            style={{ background: theme ? "hsl(209, 23%, 22%)" : "#fff" }}
+            style={{
+              background: theme ? "hsl(209, 23%, 22%)" : "#fff",
+              color: theme ? "#fff" : "#000",
+            }}
             placeholder="Search for a country..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -103,11 +106,12 @@ const Home = ({ theme }) => {
 export default Home;
 
 const HomeWrapper = styled.div`
-  padding: 0px 60px;
   .search-filter {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    padding: 0px 60px;
     margin-top: 40px;
     margin-bottom: 50px;
     p {
