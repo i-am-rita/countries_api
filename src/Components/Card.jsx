@@ -68,8 +68,6 @@ const CardWrapper = styled.div`
 
       .card {
         width: 100%;
-        ${"" /* height: 500; */}
-        ${"" /* padding: 0 0 10px 0; */}
       }
     }
   }
